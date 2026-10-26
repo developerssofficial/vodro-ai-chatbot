@@ -2,9 +2,8 @@
   "name": "vodro-ai-chatbot",
   "version": "1.0.0",
   "description": "Vodro AI - ভদ্র AI English Teacher Chatbot",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node local-server.js"
   },
   "keywords": ["ai", "english-teacher", "gemini", "vodro-ai", "bangla"],
   "author": "developerssofficial",
