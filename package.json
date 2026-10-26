@@ -1,5 +1,12 @@
 {
   "name": "vodro-ai-chatbot",
   "version": "1.0.0",
-  "private": true
+  "description": "Vodro AI - ভদ্র AI English Teacher Chatbot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["ai", "english-teacher", "gemini", "vodro-ai", "bangla"],
+  "author": "developerssofficial",
+  "license": "MIT"
 }

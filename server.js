@@ -1,10 +1,8 @@
-// local-server.js - Native Node.js server supporting both static files and /api/chat
+// server.js - Unified Node.js server and Vercel entrypoint
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const chatHandler = require('./api/chat');
-
-const PORT = process.env.PORT || 8123;
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -17,8 +15,9 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon'
 };
 
-const server = http.createServer(async (req, res) => {
-  const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+const handler = async (req, res) => {
+  const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost';
+  const parsedUrl = new URL(req.url, `http://${host}`);
 
   // Handle /api/chat
   if (parsedUrl.pathname === '/api/chat') {
@@ -74,8 +73,13 @@ const server = http.createServer(async (req, res) => {
       res.end(content);
     }
   });
-});
+};
 
-server.listen(PORT, () => {
-  console.log(`Vodro AI Server running at http://localhost:${PORT}`);
-});
+module.exports = handler;
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 8123;
+  http.createServer(handler).listen(PORT, () => {
+    console.log(`Vodro AI running at http://localhost:${PORT}`);
+  });
+}
