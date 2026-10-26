@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vodro AI - ভদ্র AI English Teacher</title>
+  <meta name="description" content="Vodro AI (ভদ্র এআই) - আপনার একান্ত ভদ্র এবং বিনয়ী ইংরেজি শিক্ষক। সহজে ইংরেজি শিখুন, ভুল শুধরে নিন এবং আত্মবিশ্বাসের সাথে কথা বলুন।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-avatar-container">
+          <div class="brand-avatar">
+            <span class="avatar-icon">🎓</span>
+            <span class="status-pulse"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-name">Vodro AI</h1>
+          <span class="brand-subtitle">ভদ্র এআই • English Teacher</span>
+        </div>
+      </div>
+
+      <!-- Quick Action / Mode Selector -->
+      <div class="section-title">অনুশীলন মোড (Practice Modes)</div>
+      <div class="mode-selector">
+        <button class="mode-btn active" data-mode="casual" id="mode-casual">
+          <span class="mode-icon">☕</span>
+          <div class="mode-info">
+            <span class="mode-title">Casual English</span>
+            <span class="mode-desc">সহজ প্রতিদিনের কথা বলা</span>
+          </div>
+        </button>
+        <button class="mode-btn" data-mode="interview" id="mode-interview">
+          <span class="mode-icon">💼</span>
+          <div class="mode-info">
+            <span class="mode-title">Job Interview</span>
+            <span class="mode-desc">চাকরির ইন্টারভিউ প্রস্তুতি</span>
+          </div>
+        </button>
+        <button class="mode-btn" data-mode="grammar" id="mode-grammar">
+          <span class="mode-icon">🩺</span>
+          <div class="mode-info">
+            <span class="mode-title">Grammar Doctor</span>
+            <span class="mode-desc">যেকোনো বাক্য পরীক্ষা ও শুদ্ধকরণ</span>
+          </div>
+        </button>
+        <button class="mode-btn" data-mode="bangla" id="mode-bangla">
+          <span class="mode-icon">🇧🇩</span>
+          <div class="mode-info">
+            <span class="mode-title">Bangla to English</span>
+            <span class="mode-desc">বাংলায় লিখুন, ইংরেজিতে শিখুন</span>
+          </div>
+        </button>
+        <button class="mode-btn" data-mode="restaurant" id="mode-restaurant">
+          <span class="mode-icon">🍽️</span>
+          <div class="mode-info">
+            <span class="mode-title">Restaurant & Travel</span>
+            <span class="mode-desc">হোটেল ও বিমান ভ্রমণের ভাষা</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Quick Learning Tools -->
+      <div class="section-title">টুলস ও টেস্ট (Tools & Quiz)</div>
+      <div class="tools-grid">
+        <button class="tool-card" id="btn-quiz-modal">
+          <span class="tool-icon">⚡</span>
+          <span class="tool-label">Quick Quiz</span>
+        </button>
+        <button class="tool-card" id="btn-vocab-modal">
+          <span class="tool-icon">📚</span>
+          <span class="tool-label">Word of the Day</span>
+        </button>
+      </div>
+
+      <!-- Teacher Personality & Settings -->
+      <div class="sidebar-settings">
+        <div class="voice-settings">
+          <div class="setting-item">
+            <label for="accent-select">🎙️ উচ্চারণ এক্সেন্ট (Accent):</label>
+            <select id="accent-select" class="custom-select">
+              <option value="UK">British English (UK)</option>
+              <option value="US" selected>American English (US)</option>
+              <option value="IN">Indian English (IN)</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <div class="switch-row">
+              <label for="auto-speak-toggle">🔊 স্বয়ংক্রিয় উচ্চারণ (Auto Speak)</label>
+              <input type="checkbox" id="auto-speak-toggle" class="toggle-switch">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-api-key" id="btn-api-key-modal" title="Gemini API Key সেট করুন">
+          <span>⚙️ AI কানেকশন / API Settings</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="polite-quote">
+          "ভুল করাই শেখার প্রথম ধাপ। নির্দ্বিধায় ভুল করুন, ভদ্র AI পরম স্নেহে শুধরে দেবে।"
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-container">
+      <!-- Top Navigation Bar -->
+      <header class="chat-header">
+        <div class="header-left">
+          <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" aria-label="Toggle menu">☰</button>
+          <div class="teacher-status-card">
+            <div class="status-avatar">
+              <span>🤵</span>
+              <span class="dot-online"></span>
+            </div>
+            <div class="status-meta">
+              <div class="teacher-title-row">
+                <span class="teacher-name">Vodro AI (ভদ্র AI)</span>
+                <span class="badge-polite">খুবই বিনয়ী শিক্ষক</span>
+              </div>
+              <span class="status-sub" id="current-mode-display">মোড: Casual English • প্রস্তুত</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn-icon" id="btn-clear-chat" title="চ্যাট ক্লিয়ার করুন">
+            🗑️ <span class="action-text">Clear Chat</span>
+          </button>
+          <button class="btn-icon" id="btn-sound-toggle" title="সাউন্ড ইফেক্ট অন/অফ">
+            🔔
+          </button>
+        </div>
+      </header>
+
+      <!-- Active Mode Banner -->
+      <div class="mode-banner" id="mode-banner">
+        <span class="mode-banner-icon" id="mode-banner-icon">☕</span>
+        <div class="mode-banner-text">
+          <strong id="mode-banner-title">Casual English Practice</strong>
+          <p id="mode-banner-desc">ভয় নেই! সাধারণ কথা বলুন, আমি প্রতিটি বাক্য সুন্দর ও নির্ভুল করে দেব।</p>
+        </div>
+        <div class="topic-suggestions" id="topic-suggestions">
+          <!-- Dynamically filled with clickable starter prompts -->
+        </div>
+      </div>
+
+      <!-- Messages Scroll Area -->
+      <div class="messages-area" id="messages-area">
+        <!-- Messages will be injected by JavaScript -->
+      </div>
+
+      <!-- Interactive Input Bar -->
+      <footer class="chat-footer">
+        <!-- Live Speech Visualizer (shows when microphone is recording) -->
+        <div class="voice-listening-bar" id="voice-listening-bar" style="display: none;">
+          <div class="listening-pulse"></div>
+          <span class="listening-text">শুনছি... ইংরেজিতে বলুন (Listening... speak in English)</span>
+          <button class="btn-stop-listening" id="btn-stop-listening">বাতিল (Stop)</button>
+        </div>
+
+        <!-- Suggestion Chips Bar -->
+        <div class="quick-chips-row" id="quick-chips-row">
+          <button class="chip-btn" data-text="Hello Vodro Sir! How are you today?">👋 "Hello Vodro Sir!"</button>
+          <button class="chip-btn" data-text="Can you check my sentence: I am go to market yesterday.">🩺 "Check my sentence"</button>
+          <button class="chip-btn" data-text="আমি কিভাবে ইংরেজিতে বিনয়ের সাথে ছুটি চাইবো?">🇧🇩 "ছুটি চাওয়ার ইংরেজি"</button>
+          <button class="chip-btn" data-text="Teach me 3 polite idioms for conversation.">✨ "3 Polite Idioms"</button>
+        </div>
+
+        <form class="input-form" id="chat-form">
+          <button type="button" class="btn-tool-input" id="btn-voice-input" title="কথা বলে লিখুন (Speech to Text)">
+            <span class="mic-icon">🎙️</span>
+          </button>
+
+          <div class="input-wrapper">
+            <textarea 
+              id="user-input" 
+              class="chat-input" 
+              rows="1" 
+              placeholder="এখানে ইংরেজিতে বা বাংলায় লিখুন... (Type in English or Bangla)"
+              autocomplete="off"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-send" id="btn-send" title="বার্তা পাঠান">
+            <span class="send-icon">➤</span>
+          </button>
+        </form>
+
+        <div class="footer-tip">
+          💡 টিপ: আপনি ভাঙা বা ভুল ইংরেজিতে লিখলেও ভদ্র AI হাসিমুখে সঠিক রূপটি বুঝিয়ে দেবে।
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Modal: Word of the day / Vocabulary -->
+  <div class="modal-backdrop" id="vocab-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>📚 আজকের ভদ্র শব্দ (Polite Word of the Day)</h3>
+        <button class="modal-close" id="btn-close-vocab">&times;</button>
+      </div>
+      <div class="modal-body" id="vocab-content">
+        <!-- Injected via JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="btn-next-vocab">আরেকটি শব্দ দেখুন 🎲</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Quick English Quiz -->
+  <div class="modal-backdrop" id="quiz-modal" style="display: none;">
+    <div class="modal-card quiz-card">
+      <div class="modal-header">
+        <h3>⚡ ঝটপট ইংরেজি কুইজ (Quick English Quiz)</h3>
+        <button class="modal-close" id="btn-close-quiz">&times;</button>
+      </div>
+      <div class="modal-body" id="quiz-content">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: API Settings -->
+  <div class="modal-backdrop" id="api-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>⚙️ AI ব্রেন সেটিংস (Gemini API Integration)</h3>
+        <button class="modal-close" id="btn-close-api">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">
+          <strong>Vodro AI</strong>-এর একটি সমৃদ্ধ নিজস্ব <em>In-built Smart Teacher Brain</em> আছে যা কোনো চাবি ছাড়াই সম্পূর্ণ কাজ করে। আপনি চাইলে অতিরিক্ত লাইভ জেমিনি AI এর জন্য আপনার নিজস্ব API Key দিতে পারেন।
+        </p>
+
+        <div class="form-group">
+          <label for="gemini-api-key">Gemini API Key (ঐচ্ছিক / Optional):</label>
+          <input type="password" id="gemini-api-key" class="text-input" placeholder="AIzaSy...">
+          <small class="help-text">আপনার কি আপনার ব্রাউজারের লোকালস্টোরেজেই সুরক্ষিত থাকবে।</small>
+        </div>
+
+        <div class="form-group">
+          <label for="ai-tone">শিক্ষকের স্বভাব (Teacher Persona):</label>
+          <select id="ai-tone" class="custom-select">
+            <option value="polite_sweet" selected>অত্যন্ত বিনয়ী ও মিষ্টি (Very Polite & Sweet)</option>
+            <option value="strict_detail">বিস্তারিত ব্যাকরণ গবেষক (Detailed Grammar Analyst)</option>
+            <option value="friendly_buddy">বন্ধুত্বপূর্ণ আমেরিকান বন্ধু (Friendly Native Buddy)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-clear-api">রিসেট করুন</button>
+        <button class="btn-primary" id="btn-save-api">সেভ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="teacher-brain.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
