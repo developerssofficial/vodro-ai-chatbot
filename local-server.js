@@ -1,4 +1,4 @@
-// server.js - Native Node.js server supporting both static files and /api/chat
+// local-server.js - Native Node.js server supporting both static files and /api/chat
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -31,7 +31,6 @@ const server = http.createServer(async (req, res) => {
         req.body = {};
       }
 
-      // Adapter for express-like res.status().json()
       const adaptedRes = {
         setHeader: (name, val) => res.setHeader(name, val),
         status: (code) => {
@@ -56,8 +55,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Handle Static files
-  let filePath = path.join(__dirname, parsedUrl.pathname === '/' ? 'index.html' : parsedUrl.pathname);
+  // Handle Static files from public/
+  let filePath = path.join(__dirname, 'public', parsedUrl.pathname === '/' ? 'index.html' : parsedUrl.pathname);
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
